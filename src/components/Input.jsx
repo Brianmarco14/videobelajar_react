@@ -2,7 +2,7 @@ import { FaEyeSlash } from "react-icons/fa";
 
 const Input = ({ label, name, type, isRequired }) => {
   return (
-    <div className="flex flex-col gap-3 bg-white">
+    <div className="flex flex-col gap-2 bg-white">
       <label
         htmlFor={name}
         className="font-dm/[140%] text-sm md:text-base flex gap-1">
@@ -15,6 +15,7 @@ const Input = ({ label, name, type, isRequired }) => {
             <img src="./src/assets/indonesia.png" alt="ID" className="size-5" />
             <select name="country-code" id="country-code" className="flex-1 px-2 border-none outline-none">
               <option value="+62">+62</option>
+              <option value="+26">+26</option>
             </select>
           </div>
         )}
@@ -22,7 +23,7 @@ const Input = ({ label, name, type, isRequired }) => {
           type={type}
           name={name}
           required
-          className="w-full p-2 outline-none "
+          className="w-full p-1 outline-none "
         />
         {type === "password" && (
           <FaEyeSlash className="text-text-secondary text-2xl cursor-pointer" />

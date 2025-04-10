@@ -11,6 +11,7 @@
     --color-success: #3ECF4C;
     --color-warning: #FCE91B;
     --color-danger: #FF5C2B;
+    --color-danger-tight: #F64920;
     --color-border-card: #F1F1F1;
     --color-border-navbar: #3A35411F;
 
@@ -19,5 +20,5 @@
 }
 
 body {
-    background-color: rgb(236, 139, 139);
+    background-color: pink;
 }

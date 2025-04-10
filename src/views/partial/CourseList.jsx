@@ -1,0 +1,55 @@
+import { IoStar, IoStarHalf, IoStarOutline } from "react-icons/io5";
+import Card from "../../components/Card";
+
+const CourseList = ({ data }) => {
+  return (
+    <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {data &&
+        data.map((item, index) => (
+          <Card
+            className={" w-full p-5 rounded-xl gap-2 md:gap-3 "}
+            key={index}>
+            <img src={item.image} alt="course" />
+            <h1 className="font-poppins/[120%] font-semibold text-lg text-text-primary">
+              {item.name}
+            </h1>
+            <p className="line-clamp-2 font-dm/[140%] font-medium tracking-[0.2px] text-text-secondary text-base">
+              {item.description}
+            </p>
+            <div className="flex items-center gap-2.5">
+              <img src={item.mentor.avatar} alt="" />
+              <div>
+                <p className="font-dm/[140%] font-medium text-base text-text-primary capitalize">
+                {item.mentor.name}
+                </p>
+                <div className="flex gap-1 font-dm text-sm font-normal text-text-secondary">
+                  <p>{item.mentor.profession}</p>
+                  <p>di</p>
+                  <p className="font-bold">{item.mentor.company}</p>
+                </div>
+              </div>
+            </div>
+            <div className="flex justify-between items-center">
+              <div className="flex gap-2 items-center">
+                <div className="flex gap-1 text-warning">
+                  <IoStar />
+                  <IoStar />
+                  <IoStar />
+                  <IoStarHalf />
+                  <IoStarOutline />
+                </div>
+                <p className="font-dm/[140%] font-medium text-sm text-text-secondary underline underline-offset-2">
+                {item.rating} ({item.sold})
+                </p>
+              </div>
+              <p className="font-poppins/[120%] text-success text-2xl font-semibold">
+              {item.price}
+              </p>
+            </div>
+          </Card>
+        ))}
+    </div>
+  );
+};
+
+export default CourseList;

@@ -1,6 +1,15 @@
+import CtaSection from "../components/Cta"
+import Hero from "../components/Hero"
+import CourseSection from "./partial/CourseSection"
+
 const Homepage = () => {
+  
   return (
-    <div className="text-danger font-bold">Homepage</div>
+    <div className="pt-36 flex flex-col items-center gap-16">
+      <Hero />
+      <CourseSection />
+      <CtaSection />
+    </div>
   )
 }
 
