@@ -10,7 +10,7 @@ const Login = () => {
     <>
     <Navbar />
     <div className="flex justify-center items-center h-[100svh] px-6 xl:px-0 py-5 xl:py-0 pt-16">
-      <Card className={"p-5 md:p-9"}>
+      <Card className={"p-5 md:p-9 max-w-screen-sm w-full text-center gap-5 md:gap-8 "}>
         <Title
           title={"Masuk ke Akun"}
           sub={"Yuk, lanjutin belajarmu di videobelajar."}
