@@ -13,12 +13,12 @@ const Footer = () => {
         <div className="w-full flex flex-col md:flex-row justify-between items-center gap-4 bg-white">
           <div className="flex flex-col gap-2 md:gap-4 w-full md:w-[50%]">
             <img
-              src="./src/assets/logo.png"
+              src="/assets/logo.png"
               alt="logo"
               className="w-48 h-10"
             />
             <div className="flex flex-col gap-2 md:gap-3">
-              <h1 className="w-[60%] font-dm/[140%] text-lg font-bold text-text-primary">
+              <h1 className="w-full md:w-[60%] font-dm/[140%] text-lg font-bold text-text-primary">
                 Gali Potensi Anda Melalui Pembelajaran Video di hariesok.id!
               </h1>
               <p className="font-dm/[140%] text-base font-normal text-text-primary tracking-[0.2px]">

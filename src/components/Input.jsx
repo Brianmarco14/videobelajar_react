@@ -12,7 +12,7 @@ const Input = ({ label, name, type, isRequired }) => {
       <div className="border border-border-card rounded-md px-2.5 py-1 flex items-center gap-2">
         {type === "tel" && (
           <div className="flex items-center">
-            <img src="./src/assets/indonesia.png" alt="ID" className="size-5" />
+            <img src="/assets/indonesia.png" alt="ID" className="size-5" />
             <select name="country-code" id="country-code" className="flex-1 px-2 border-none outline-none">
               <option value="+62">+62</option>
               <option value="+26">+26</option>

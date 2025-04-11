@@ -7,7 +7,7 @@ const Navbar = ({ isProfile }) => {
       <div className="max-w-screen-xl w-full flex items-center justify-between">
         <Link to={'/'}>
         <img
-          src="./src/assets/logo.png"
+          src="/assets/logo.png"
           alt="logo"
           className="w-32 md:w-48 h-6 md:h-10"
           />
@@ -15,7 +15,7 @@ const Navbar = ({ isProfile }) => {
         {isProfile && (
           <button className="hidden md:flex items-center gap-6 cursor-pointer">
             <span className="font-dm/[140%] text-text-secondary tracking-[0.2px] font-medium">Kategori</span>
-            <img src="./src/assets/Avatar.png" alt="logo" className="size-10" />
+            <img src="/assets/Avatar.png" alt="logo" className="size-10" />
           </button>
         )}
 

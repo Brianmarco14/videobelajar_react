@@ -65,7 +65,7 @@ const Register = () => {
             className={
               "text-text-third border border-border-card flex items-center justify-center gap-2"
             }>
-            <img src="./src/assets/google.png" /> Masuk dengan Google
+            <img src="/assets/google.png" /> Masuk dengan Google
           </Button>
         </form>
       </Card>

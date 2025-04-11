@@ -3,7 +3,7 @@ import Button from "./Button";
 
 const Hero = () => {
   return (
-    <section className="max-w-screen-xl w-full bg-[url(./src/assets/hero-bg.jpg)] bg-center bg-cover px-5 md:px-36 pt-20 pb-16 relative flex flex-col items-center gap-6 rounded-xl overflow-hidden">
+    <section className="max-w-screen-xl w-full bg-[url(/assets/hero-bg.jpg)] bg-center bg-cover px-5 md:px-36 pt-20 pb-16 relative flex flex-col items-center gap-6 rounded-xl overflow-hidden">
       <span className="absolute top-0 left-0 w-full h-full bg-black/80 "></span>
       <div className="flex flex-col items-center gap-6">
         <h1 className="text-white z-10 font-poppins font-bold text-2xl md:text-5xl text-center md:max-w-[850px] w-full">
