@@ -3,6 +3,7 @@ import Homepage from "./views/Homepage"
 import Login from "./views/auth/Login"
 import Register from "./views/auth/Register"
 import Layout from "./views"
+import NotFound from "./views/NotFound"
 
 const App = () => {
   return (
@@ -13,6 +14,7 @@ const App = () => {
         </Route>
         <Route path="login" element={<Login />}/>
         <Route path="register" element={<Register />}/>
+        <Route path="*" element={<NotFound />}/>
 
       </Routes>
     </>

@@ -14,6 +14,7 @@ export const courses = [
         image: "/assets/courses/course-1.png",
         rating: 3.5,
         sold: 86,
+        category: "bisnis",
         mentor: {
             name: "Jenna Ortega",
             avatar: "/assets/mentor/avatar-1.png",
@@ -29,6 +30,7 @@ export const courses = [
         image: "/assets/courses/course-2.png",
         rating: 3.5,
         sold: 86,
+        category: "pemasaran",
         mentor: {
             name: "Jenna Ortega",
             avatar: "/assets/mentor/avatar-2.png",
@@ -44,6 +46,7 @@ export const courses = [
         image: "/assets/courses/course-3.png",
         rating: 3.5,
         sold: 86,
+        category: "desain",
         mentor: {
             name: "Jenna Ortega",
             avatar: "/assets/mentor/avatar-3.png",
@@ -59,6 +62,7 @@ export const courses = [
         image: "/assets/courses/course-4.png",
         rating: 3.5,
         sold: 86,
+        category: "pengmbangan",
         mentor: {
             name: "Jenna Ortega",
             avatar: "/assets/mentor/avatar-4.png",
@@ -74,6 +78,7 @@ export const courses = [
         image: "/assets/courses/course-5.png",
         rating: 3.5,
         sold: 86,
+        category: "pemasaran",
         mentor: {
             name: "Jenna Ortega",
             avatar: "/assets/mentor/avatar-5.png",
@@ -89,6 +94,7 @@ export const courses = [
         image: "/assets/courses/course-6.png",
         rating: 3.5,
         sold: 86,
+        category: "bisnis",
         mentor: {
             name: "Jenna Ortega",
             avatar: "/assets/mentor/avatar-6.png",
@@ -104,6 +110,7 @@ export const courses = [
         image: "/assets/courses/course-7.png",
         rating: 3.5,
         sold: 86,
+        category: "pengmbangan",
         mentor: {
             name: "Jenna Ortega",
             avatar: "/assets/mentor/avatar-7.png",
@@ -119,6 +126,7 @@ export const courses = [
         image: "/assets/courses/course-8.png",
         rating: 3.5,
         sold: 86,
+        category: "desain",
         mentor: {
             name: "Jenna Ortega",
             avatar: "/assets/mentor/avatar-8.png",
@@ -134,6 +142,7 @@ export const courses = [
         image: "/assets/courses/course-9.png",
         rating: 3.5,
         sold: 86,
+        category: "pemasaran",
         mentor: {
             name: "Jenna Ortega",
             avatar: "/assets/mentor/avatar-9.png",
@@ -141,4 +150,4 @@ export const courses = [
             company: "Gojek"
         }
     },
-]
+];
