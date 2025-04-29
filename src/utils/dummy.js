@@ -7,10 +7,11 @@ export const categories = [
 
 export const courses = [
     {
+        id: 1,
         name: "Big 4 Auditor Financial Analyst",
         slug: "big-4-auditor-financial-analyst",
         description: "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan  kurikulum terbaik",
-        price: "Rp 300K",
+        price: "300K",
         image: "/assets/courses/course-1.png",
         rating: 3.5,
         sold: 86,
@@ -23,10 +24,11 @@ export const courses = [
         }
     },
     {
+        id: 2,
         name: "Big 4 Auditor Financial Analyst",
         slug: "big-4-auditor-financial-analyst",
         description: "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan  kurikulum terbaik",
-        price: "Rp 300K",
+        price: "300K",
         image: "/assets/courses/course-2.png",
         rating: 3.5,
         sold: 86,
@@ -39,10 +41,11 @@ export const courses = [
         }
     },
     {
+        id: 3,
         name: "Big 4 Auditor Financial Analyst",
         slug: "big-4-auditor-financial-analyst",
         description: "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan  kurikulum terbaik",
-        price: "Rp 300K",
+        price: "300K",
         image: "/assets/courses/course-3.png",
         rating: 3.5,
         sold: 86,
@@ -55,10 +58,11 @@ export const courses = [
         }
     },
     {
+        id: 4,
         name: "Big 4 Auditor Financial Analyst",
         slug: "big-4-auditor-financial-analyst",
         description: "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan  kurikulum terbaik",
-        price: "Rp 300K",
+        price: "300K",
         image: "/assets/courses/course-4.png",
         rating: 3.5,
         sold: 86,
@@ -71,10 +75,11 @@ export const courses = [
         }
     },
     {
+        id: 5,
         name: "Big 4 Auditor Financial Analyst",
         slug: "big-4-auditor-financial-analyst",
         description: "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan  kurikulum terbaik",
-        price: "Rp 300K",
+        price: "300K",
         image: "/assets/courses/course-5.png",
         rating: 3.5,
         sold: 86,
@@ -87,10 +92,11 @@ export const courses = [
         }
     },
     {
+        id: 6,
         name: "Big 4 Auditor Financial Analyst",
         slug: "big-4-auditor-financial-analyst",
         description: "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan  kurikulum terbaik",
-        price: "Rp 300K",
+        price: "300K",
         image: "/assets/courses/course-6.png",
         rating: 3.5,
         sold: 86,
@@ -103,10 +109,11 @@ export const courses = [
         }
     },
     {
+        id: 7,
         name: "Big 4 Auditor Financial Analyst",
         slug: "big-4-auditor-financial-analyst",
         description: "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan  kurikulum terbaik",
-        price: "Rp 300K",
+        price: "300K",
         image: "/assets/courses/course-7.png",
         rating: 3.5,
         sold: 86,
@@ -119,10 +126,11 @@ export const courses = [
         }
     },
     {
+        id: 8,
         name: "Big 4 Auditor Financial Analyst",
         slug: "big-4-auditor-financial-analyst",
         description: "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan  kurikulum terbaik",
-        price: "Rp 300K",
+        price: "300K",
         image: "/assets/courses/course-8.png",
         rating: 3.5,
         sold: 86,
@@ -135,10 +143,11 @@ export const courses = [
         }
     },
     {
+        id: 9,
         name: "Big 4 Auditor Financial Analyst",
         slug: "big-4-auditor-financial-analyst",
         description: "Mulai transformasi dengan instruktur profesional, harga yang terjangkau, dan  kurikulum terbaik",
-        price: "Rp 300K",
+        price: "300K",
         image: "/assets/courses/course-9.png",
         rating: 3.5,
         sold: 86,

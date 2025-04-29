@@ -4,3 +4,12 @@ export const generateUUID = () =>
       const v = c === 'x' ? r : (r & 0x3) | 0x8
       return v.toString(16)
     })
+
+export const generateSlug = (name) => {
+  return name
+    .toLowerCase()               
+    .trim()                     
+    .replace(/[^a-z0-9\s-]/g, '') 
+    .replace(/\s+/g, '-')          
+    .replace(/-+/g, '-');        
+}

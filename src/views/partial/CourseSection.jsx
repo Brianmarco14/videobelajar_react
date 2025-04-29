@@ -6,13 +6,15 @@ import CourseList from "./CourseList"
 import Button from "../../components/Button"
 import { FaPlus } from "react-icons/fa"
 import Modal from "../../components/Modal"
-import { generateUUID } from "../../utils/generate"
+import { generateSlug, generateUUID } from "../../utils/generate"
 
 const CourseSection = () => {
   const category = categories
   const [dataCourses, setDataCourses] = useState(courses)
   const [activeTab, setActiveTab] = useState("all")
   const [isModalOpen, setIsModalOpen] = useState(false)
+  const [isEditMode, setIsEditMode] = useState(false);
+  const [editId, setEditId] = useState(null);
 
   const handleTab = (item) => {
     setActiveTab(item)
@@ -25,8 +27,27 @@ const CourseSection = () => {
   }
 
   const handleModal = () => {
-    setIsModalOpen(prevState => !prevState)
+    setIsModalOpen(prevState => !prevState);
+    setIsEditMode(false);
+    setEditId(null);
+    setFormData({
+      name: '',
+      slug: '',
+      description: '',
+      price: '',
+      image: '/assets/courses/course-1.png',
+      rating: 0,
+      sold: 0,
+      category: '',
+      mentor: {
+        name: "Jenna Ortega",
+        avatar: "/assets/mentor/avatar-2.png",
+        profession: "Senior Accountant",
+        company: "Gojek"
+      }
+    });
   }
+  
 
   const [formData, setFormData] = useState({
     name: '',
@@ -47,25 +68,41 @@ const CourseSection = () => {
 
   const handleChange = (e) => {
     const { name, value } = e.target
-    setFormData({
-      ...formData,
-      [name]: value
+    setFormData(prev => {
+      const updated = { ...prev, [name]: value }
+      if (name === 'name') {
+        updated.slug = generateSlug(value)
+      }
+      return updated
     })
   }
 
   const handleSubmit = (e) => {
-    e.preventDefault()
-    const newCourse = {
-      ...formData,
-      id: generateUUID()
+    e.preventDefault();
+
+    if (isEditMode) {
+      // Update existing course
+      setDataCourses(prev =>
+        prev.map(course =>
+          course.id === editId ? { ...course, ...formData } : course
+        )
+      );
+    } else {
+      // Create new course
+      const newCourse = {
+        ...formData,
+        id: generateUUID()
+      };
+      setDataCourses(prev => [...prev, newCourse]);
     }
-    onSubmit(newCourse)
+
+    setIsModalOpen(false);
     setFormData({
       name: '',
       slug: '',
       description: '',
       price: '',
-      image: '',
+      image: '/assets/courses/course-1.png',
       rating: 0,
       sold: 0,
       category: '',
@@ -75,8 +112,26 @@ const CourseSection = () => {
         profession: "Senior Accountant",
         company: "Gojek"
       }
-    })
+    });
+    setIsEditMode(false);
+    setEditId(null);
   }
+
+
+  const handleDelete = (id) => {
+    setDataCourses(prev => prev.filter(course => course.id !== id))
+  }
+
+  const handleEdit = (course) => {
+    setFormData({
+      ...course
+    });
+    setIsEditMode(true);
+    setEditId(course.id);
+    setIsModalOpen(true);
+  }
+
+
 
   return (
     <>
@@ -89,7 +144,7 @@ const CourseSection = () => {
           <Tab data={category} active={activeTab} handle={handleTab} />
           <Button className={'bg-green-500 text-white flex gap-2 items-center'} onClick={handleModal}><FaPlus /></Button>
         </div>
-        <CourseList data={dataCourses} />
+        <CourseList data={dataCourses} handleDelete={handleDelete} handleEdit={handleEdit}/>
       </section>
       {
         isModalOpen && (
@@ -102,7 +157,7 @@ const CourseSection = () => {
                 </div>
                 <div className="flex flex-col gap-1 flex-1">
                   <label className="text-sm text-text-secondary font-semibold" htmlFor="price">Price</label>
-                  <input type="text" name="price" className="text-text-primary border  border-border-card p-1 rounded-lg outline-none" value={formData.price} onChange={handleChange}/>
+                  <input type="text" name="price" className="text-text-primary border  border-border-card p-1 rounded-lg outline-none" value={formData.price} onChange={handleChange} />
                 </div>
               </div>
               <div className="flex flex-col gap-1 flex-1">
@@ -111,13 +166,9 @@ const CourseSection = () => {
               </div>
               <div className="flex gap-5">
                 <div className="flex flex-col gap-1 flex-1">
-                  <label className="text-sm text-text-secondary font-semibold" htmlFor="name">Image</label>
-                  <input type="file" name="name" className="text-text-primary border  border-border-card p-1 rounded-lg outline-none" />
-                </div>
-                <div className="flex flex-col gap-1 flex-1">
                   <label className="text-sm text-text-secondary font-semibold" htmlFor="category">Category</label>
                   <select name="category" id="category" aria-placeholder="pilih category" className="border border-border-card p-1 rounded-lg outline-none" value={formData.category} onChange={handleChange}>
-                    
+
                     {
                       categories && categories.map((item, index) => (
                         <option value={item.slug} key={index}>{item.name}</option>
@@ -127,8 +178,8 @@ const CourseSection = () => {
                 </div>
               </div>
               <div className="flex gap-2 justify-end">
-                <Button className={"bg-green-500 text-white"}>Create</Button>
-                <Button className={"bg-gray-200 "}>Cancel</Button>
+                <Button className={"bg-green-500 text-white"}>Submit</Button>
+                <Button className={"bg-gray-200"} onClick={handleModal}>Cancel</Button>              
               </div>
             </form>
           </Modal>
