@@ -4,6 +4,14 @@ import { FaPen, FaTrash } from "react-icons/fa";
 import Button from "../../components/Button";
 
 const CourseList = ({ data, handleDelete, handleEdit }) => {
+  if (!data) {
+    return <p>Loading...</p>;
+  }
+
+  if (data.length === 0) {
+    return <p className="text-center w-full">Belum ada kursus</p>;
+  }
+
   return (
     <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
       {data &&

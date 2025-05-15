@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import Tab from "../../components/Tab"
 import Title from "../../components/Title"
 import { categories, courses } from "../../utils/dummy"
@@ -7,24 +7,45 @@ import Button from "../../components/Button"
 import { FaPlus } from "react-icons/fa"
 import Modal from "../../components/Modal"
 import { generateSlug, generateUUID } from "../../utils/generate"
+import { getAllCategories } from "../../services/api/categories"
+import { getAllCourses, insertCourse } from "../../services/api/courses"
 
 const CourseSection = () => {
-  const category = categories
-  const [dataCourses, setDataCourses] = useState(courses)
+  const [categories, setCategories] = useState([])
+  const [allCourses, setAllCourses] = useState([]);
+  const [courses, setCourses] = useState([])
   const [activeTab, setActiveTab] = useState("all")
   const [isModalOpen, setIsModalOpen] = useState(false)
   const [isEditMode, setIsEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
 
-  const handleTab = (item) => {
-    setActiveTab(item)
-    if (item === "all") {
-      setDataCourses(courses)
-    } else {
-      const filtered = courses.filter((course) => course.category === item)
-      setDataCourses(filtered)
+
+  const fetchData = async () => {
+    try {
+      const dataCategory = await getAllCategories()
+      const dataCourses = await getAllCourses()
+      setCategories(dataCategory)
+      setAllCourses(dataCourses);
+      setCourses(dataCourses)
+    } catch (error) {
+      console.error(error)
+      throw error
     }
   }
+
+  useEffect(() => {
+    fetchData()
+  }, [])
+
+  const handleTab = (item) => {
+    setActiveTab(item);    
+    if (item === "all") {
+      setCourses(allCourses);
+    } else {
+      const filtered = allCourses.filter((course) => course.category === item);
+      setCourses(filtered);
+    }
+  };
 
   const handleModal = () => {
     setIsModalOpen(prevState => !prevState);
@@ -47,7 +68,7 @@ const CourseSection = () => {
       }
     });
   }
-  
+
 
   const [formData, setFormData] = useState({
     name: '',
@@ -77,23 +98,18 @@ const CourseSection = () => {
     })
   }
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
 
     if (isEditMode) {
-      // Update existing course
-      setDataCourses(prev =>
+      setCourses(prev =>
         prev.map(course =>
           course.id === editId ? { ...course, ...formData } : course
         )
       );
     } else {
-      // Create new course
-      const newCourse = {
-        ...formData,
-        id: generateUUID()
-      };
-      setDataCourses(prev => [...prev, newCourse]);
+      await insertCourse(formData)
+      fetchData()
     }
 
     setIsModalOpen(false);
@@ -119,7 +135,7 @@ const CourseSection = () => {
 
 
   const handleDelete = (id) => {
-    setDataCourses(prev => prev.filter(course => course.id !== id))
+    setCourses(prev => prev.filter(course => course.id !== id))
   }
 
   const handleEdit = (course) => {
@@ -132,7 +148,6 @@ const CourseSection = () => {
   }
 
 
-
   return (
     <>
       <section className="max-w-screen-xl w-full flex flex-col gap-8">
@@ -141,10 +156,10 @@ const CourseSection = () => {
           sub={"Jelajahi Dunia Pengetahuan Melalui Pilihan Kami!"}
         />
         <div className="flex items-center justify-between w-full">
-          <Tab data={category} active={activeTab} handle={handleTab} />
+          <Tab data={categories} active={activeTab} handle={handleTab} />
           <Button className={'bg-green-500 text-white flex gap-2 items-center'} onClick={handleModal}><FaPlus /></Button>
         </div>
-        <CourseList data={dataCourses} handleDelete={handleDelete} handleEdit={handleEdit}/>
+        <CourseList data={courses} handleDelete={handleDelete} handleEdit={handleEdit} />
       </section>
       {
         isModalOpen && (
@@ -168,7 +183,6 @@ const CourseSection = () => {
                 <div className="flex flex-col gap-1 flex-1">
                   <label className="text-sm text-text-secondary font-semibold" htmlFor="category">Category</label>
                   <select name="category" id="category" aria-placeholder="pilih category" className="border border-border-card p-1 rounded-lg outline-none" value={formData.category} onChange={handleChange}>
-
                     {
                       categories && categories.map((item, index) => (
                         <option value={item.slug} key={index}>{item.name}</option>
@@ -179,7 +193,7 @@ const CourseSection = () => {
               </div>
               <div className="flex gap-2 justify-end">
                 <Button className={"bg-green-500 text-white"}>Submit</Button>
-                <Button className={"bg-gray-200"} onClick={handleModal}>Cancel</Button>              
+                <Button className={"bg-gray-200"} onClick={handleModal}>Cancel</Button>
               </div>
             </form>
           </Modal>
