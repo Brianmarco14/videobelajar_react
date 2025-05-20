@@ -9,3 +9,14 @@ export const insertCourse = async(data) => {
     const result = await axiosInstance.post('/courses', data)
     return result
 }
+
+export const updateCourse = async(id, data) => {
+  const result = await axiosInstance.put(`/courses/${id}`, data)
+  return result
+}
+
+export const deleteCourse = async(id) => {
+  const result = await axiosInstance.delete(`/courses/${id}`)
+  return result
+}
+
