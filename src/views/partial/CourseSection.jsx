@@ -1,54 +1,38 @@
 import { useEffect, useState } from "react";
+import { FaPlus } from "react-icons/fa";
+import Button from "../../components/Button";
+import Modal from "../../components/Modal";
 import Tab from "../../components/Tab";
 import Title from "../../components/Title";
+import useCourseStore from "../../store/zustand/store";
+import { generateSlug } from "../../utils/generate";
 import CourseList from "./CourseList";
-import Button from "../../components/Button";
-import { FaPlus } from "react-icons/fa";
-import Modal from "../../components/Modal";
-import { generateSlug, generateUUID } from "../../utils/generate";
-import { getAllCategories } from "../../services/api/categories";
-import {
-  deleteCourse,
-  getAllCourses,
-  insertCourse,
-  updateCourse,
-} from "../../services/api/courses";
 
 const CourseSection = () => {
-  const [categories, setCategories] = useState([]);
-  const [allCourses, setAllCourses] = useState([]);
-  const [courses, setCourses] = useState([]);
+  const {
+    courses,
+    categories,
+    fetchCourses,
+    filterCoursesByCategory,
+    createCourse,
+    updateCourse: updateCourseStore,
+    deleteCourse: deleteCourseStore
+  } = useCourseStore();
+
   const [activeTab, setActiveTab] = useState("all");
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEditMode, setIsEditMode] = useState(false);
   const [editId, setEditId] = useState(null);
 
-  const fetchData = async () => {
-    try {
-      const dataCategory = await getAllCategories();
-      const dataCourses = await getAllCourses();
-      setCategories(dataCategory);
-      setAllCourses(dataCourses);
-      setCourses(dataCourses);
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
-  };
-
   useEffect(() => {
-    fetchData();
+    fetchCourses();
   }, []);
 
   const handleTab = (item) => {
     setActiveTab(item);
-    if (item === "all") {
-      setCourses(allCourses);
-    } else {
-      const filtered = allCourses.filter((course) => course.category === item);
-      setCourses(filtered);
-    }
+    filterCoursesByCategory(item);
   };
+
 
   const handleModal = () => {
     setIsModalOpen((prevState) => !prevState);
@@ -104,58 +88,17 @@ const CourseSection = () => {
     e.preventDefault();
 
     if (isEditMode) {
-      setCourses((prev) =>
-        prev.map((course) =>
-          course.id === editId ? { ...course, ...formData } : course
-        )
-      );
-
-      try {
-        await updateCourse(editId, formData);
-        fetchData();
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
+      await updateCourseStore(editId, formData);
     } else {
-      try {
-        await insertCourse(formData);
-        fetchData();
-      } catch (error) {
-        console.error(error);
-        throw error;
-      }
+      await createCourse(formData);
     }
 
     setIsModalOpen(false);
-    setFormData({
-      name: "",
-      slug: "",
-      description: "",
-      price: "",
-      image: "/assets/courses/course-1.png",
-      rating: 0,
-      sold: 0,
-      category: "",
-      mentor: {
-        name: "Jenna Ortega",
-        avatar: "/assets/mentor/avatar-2.png",
-        profession: "Senior Accountant",
-        company: "Gojek",
-      },
-    });
-    setIsEditMode(false);
-    setEditId(null);
+    resetForm();
   };
 
   const handleDelete = async (id) => {
-    try {
-      await deleteCourse(id);
-      fetchData();
-    } catch (error) {
-      console.error(error);
-      throw error;
-    }
+    await deleteCourseStore(id);
   };
 
   const handleEdit = (course) => {
